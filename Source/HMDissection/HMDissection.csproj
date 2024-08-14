@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -59,9 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompatibilityUtility.cs" />
-    <Compile Include="Dissection.cs" />
     <Compile Include="DissectionDefOf.cs" />
     <Compile Include="DissectionUtility.cs" />
+    <Compile Include="CustomWidget.cs" />
+    <Compile Include="Listing_Dissection.cs" />
+    <Compile Include="ModSettings_Dissection.cs" />
+    <Compile Include="Mod_Dissection.cs" />
     <Compile Include="Filters\DissectedFilter.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="JobDriver_DoDissectionBill.cs" />
@@ -71,11 +76,19 @@
     <Compile Include="WorkSettingsPatches.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="Krafs.Publicizer">
+      <Version>2.2.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>1.5.4146-beta</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(ProjectDir)..\..\CopyModFolder.exe"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

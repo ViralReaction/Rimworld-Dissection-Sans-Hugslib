@@ -107,7 +107,7 @@ namespace HMDissection
                 Job curJob = actor.jobs.curJob;
                 Corpse corpse = actor.jobs.curJob.GetTarget(TargetIndex.B).Thing as Corpse;
 
-                actor.skills.GetSkill(SkillDefOf.Medicine).Learn(Dissection.Singleton.ExpPerCorpse, Dissection.Singleton.IgnoreDailyLimit);
+                actor.skills.GetSkill(SkillDefOf.Medicine).Learn(ModSettings_Dissection.ExpPerCorpse, ModSettings_Dissection.IgnoreDailyLimit);
 
                 ApplyThoughts(actor, corpse);
                 RecordTale(actor, corpse);
@@ -373,11 +373,11 @@ namespace HMDissection
         private static bool RemoveDissectedBodyParts(Pawn actor, Corpse corpse)
         {
             // There is a chance the whole body is destroyed in the process
-            bool destroyBody = Dissection.Singleton.AlwaysDetroyBodies;
+            bool destroyBody = ModSettings_Dissection.AlwaysDetroyBodies;
             if(!destroyBody)
             {
                 float skillLevelMultiplier = 1.0f - (float)actor.skills.GetSkill(SkillDefOf.Medicine).Level / SkillRecord.MaxLevel;
-                float chance = Dissection.Singleton.DestroyBodyChance * skillLevelMultiplier * skillLevelMultiplier;
+                float chance = ModSettings_Dissection.DestroyBodyChance * skillLevelMultiplier * skillLevelMultiplier;
                 float rand = Rand.Range(0.0f, 1.0f);
                 destroyBody = rand <= chance;
             }
