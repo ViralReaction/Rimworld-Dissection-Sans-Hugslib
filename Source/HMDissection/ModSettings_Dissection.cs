@@ -30,13 +30,28 @@ namespace HMDissection
             options.GapLine();
             Text.Font = GameFont.Medium;
             Text.Font = GameFont.Small;
+            options.Gap();
+            DestroyBodyChance = options.CustomSliderLabel("Dissection_DestroyBodyChanceSetting_title".Translate(), DestroyBodyChance, 0f, 1f, 0.5f, "Dissection_DestroyBodyChanceSetting_desc".Translate(), (DestroyBodyChance * 100).ToString("F2") + "%", 1f.ToString(), 0f.ToString(), 0.01f);
+            options.Gap();
+            ExpPerCorpse = options.CustomSliderLabelInt("Dissection_ExpSetting_title".Translate(), ExpPerCorpse, 0, 100000, 0.5f, "Dissection_ExpSetting_desc".Translate(), ExpPerCorpse.ToString(), 100000.ToString(), 0.ToString(), 1000);
+            options.Gap();
             options.CustomCheckboxLabeled("Dissection_DailyLimitSetting_title".Translate(), ref IgnoreDailyLimit, "Dissection_DailyLimitSetting_desc".Translate());
             options.CustomCheckboxLabeled("Dissection_AlwaysDestroyBodiesSetting_title".Translate(), ref AlwaysDetroyBodies, "Dissection_AlwaysDestroyBodiesSetting_desc".Translate());
-            DestroyBodyChance = options.CustomSliderLabel("Dissection_DestroyBodyChanceSetting_title".Translate(), DestroyBodyChance, 0f, 1f, 0.5f, "Dissection_DestroyBodyChanceSetting_desc".Translate(), null, null, Math.Ceiling(DestroyBodyChance * 100) + "%", 0.01f);
+            options.GapLine();
             options.Gap();
-            ExpPerCorpse = options.CustomSliderLabelInt("Dissection_ExpSetting_title".Translate(), ExpPerCorpse, 0, 100000, 0.5f, "Dissection_ExpSetting_desc".Translate(), null, null, ExpPerCorpse.ToString(), 1000);
+            if (options.ButtonText("Reset to Defaults"))
+            {
+                ResetSettingsToDefault();
+            }
             options.End();
             Widgets.EndScrollView();
+        }
+        private void ResetSettingsToDefault()
+        {
+            DestroyBodyChance = 0.7f;
+            ExpPerCorpse = 3000;
+            IgnoreDailyLimit = false;
+            AlwaysDetroyBodies = false;
         }
 
         public static float
