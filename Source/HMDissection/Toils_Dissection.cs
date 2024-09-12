@@ -107,13 +107,11 @@ namespace HMDissection
                 Job curJob = actor.jobs.curJob;
                 Corpse corpse = actor.jobs.curJob.GetTarget(TargetIndex.B).Thing as Corpse;
 
-                actor.skills.GetSkill(SkillDefOf.Medicine).Learn(ModSettings_Dissection.ExpPerCorpse, ModSettings_Dissection.IgnoreDailyLimit);
+                actor.skills.GetSkill(SkillDefOf.Medicine).Learn((float)ModSettings_Dissection.ExpPerCorpse, false, ModSettings_Dissection.IgnoreDailyLimit);
 
                 ApplyThoughts(actor, corpse);
                 RecordTale(actor, corpse);
-
                 bool destroyedBody = RemoveDissectedBodyParts(actor, corpse);
-
                 curJob.bill.Notify_IterationCompleted(actor, new List<Thing>() { corpse });
                 RecordsUtility.Notify_BillDone(actor, new List<Thing>() { corpse });
 
@@ -391,7 +389,6 @@ namespace HMDissection
                             .CapitalizeFirst(),
                         actor, MessageTypeDefOf.NegativeEvent);
                 }
-                Log.Message($"Destroyed {corpse.InnerPawn.Name}'s body while dissecting.");
                 corpse.Destroy();
                 return true;
             }

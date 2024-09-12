@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using HarmonyLib;
 using UnityEngine;
 using Verse;
+using HarmonyLib;
 
 namespace HMDissection
 {
@@ -12,10 +12,12 @@ namespace HMDissection
         public Mod_Dissection(ModContentPack content) : base(content)
         {
             settings = GetSettings<ModSettings_Dissection>();
-            Harmony harmony = new Harmony(this.Content.PackageIdPlayerFacing);
+            Harmony harmony = new (this.Content.PackageIdPlayerFacing);
+            //PostMortem_WorkGiver_DoBill_JobOnThing_Patch.Enabled(harmony);
             harmony.PatchAll();
 
         }
+
         public override void DoSettingsWindowContents(Rect inRect)
         {
             settings.DoSettingsWindowContents(inRect);
@@ -28,5 +30,6 @@ namespace HMDissection
         {
             base.WriteSettings();
         }
+        
     }
 }
